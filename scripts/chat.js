@@ -42,19 +42,14 @@ class Chatroom {
   }
 }
 
-const chatroom = new Chatroom('gaming', 'shaun');
-
-chatroom.getChats(data => {
-  console.log(data);
-});
 
 // chatroom.updateRoom('gaming');
 
-setTimeout(() => {
-  chatroom.updateRoom('gaming');
-  chatroom.updateName('Yashi');
-  chatroom.getChats(data => {
-    console.log(data);
-  });
-  chatroom.addChat('hello');
-}, 3000);
+// setTimeout(() => {
+//   chatroom.updateRoom('gaming');
+//   chatroom.updateName('Yashi');
+//   chatroom.getChats(data => {
+//     console.log(data);
+//   });
+//   chatroom.addChat('hello');
+// }, 3000);
