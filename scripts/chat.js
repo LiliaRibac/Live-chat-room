@@ -1,32 +1,39 @@
-// adding new chat documents
-// seatting up real-time listener to get new chats
-// updating the username
-// updating the room
-
-class Chatroom{
-  constructor(room, userName){
+class Chatroom {
+  constructor(room, username){
     this.room = room;
-    this.userName = userName;
+    this.username = username;
     this.chats = db.collection('chats');
   }
   async addChat(message){
     // format a chat object
     const now = new Date();
-    const chat ={
-      message,
-      userName: this.userName,
+    const chat = {
+      message: message,
+      username: this.username,
       room: this.room,
       created_at: firebase.firestore.Timestamp.fromDate(now)
     };
     // save the chat document
-    const response = await this.chats.add(chat)
-    return response
+    const response = await this.chats.add(chat);
+    return response;
+  }
+  getChats(callback){
+    this.chats
+      .where('room', '==', this.room )
+      .orderBy('created_at')
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
+          if(change.type === 'added'){
+            callback(change.doc.data());
+          }
+        });
+    });
   }
 }
 
-const chatroom = new Chatroom("gaming","Bob");
-console.log(chatroom)
+const chatroom = new Chatroom('gaming', 'shaun');
 
-chatroom.addChat('Hello everyone')
-  .then(() => console.log('Chat added'))
-  .catch(err => console.log(err))
+chatroom.getChats(data => {
+  console.log(data);
+});
+
