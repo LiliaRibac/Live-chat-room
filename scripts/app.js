@@ -1,4 +1,5 @@
 //  dom queries
+
 const chatList = document.querySelector('.chat-list');
 const newChatForm = document.querySelector('.new-chat');
 const newNameForm = document.querySelector('.new-name');
@@ -8,6 +9,7 @@ const rooms = document.querySelector('.chat-rooms')
 //add a new chat
 newChatForm.addEventListener('submit', e => {
   e.preventDefault();
+
 
   const message = newChatForm.message.value.trim();
   chatroom

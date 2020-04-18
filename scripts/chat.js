@@ -1,3 +1,5 @@
+
+
 class Chatroom {
   constructor(room, username) {
     this.room = room;
@@ -18,6 +20,8 @@ class Chatroom {
     const response = await this.chats.add(chat);
     return response;
   }
+
+
   getChats(callback) {
     this.unsub = this.chats
       .where('room', '==', this.room)
